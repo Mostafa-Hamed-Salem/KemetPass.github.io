@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemet Pass Premium Portal | بوابة كيميت باس السيادية</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        .font-cairo { font-family: 'Cairo', sans-serif; }
+        .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body {
+            background-color: #F4F5F7;
+            color: #1F2937;
+            transition: background-color 0.3s ease;
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { border-color: #D4AF37; box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            50% { border-color: #F3C63F; box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+        }
+        
+        @keyframes wave-effect {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+        
+        .wave-ring {
+            position: absolute;
+            border: 4px solid #D4AF37;
+            border-radius: 50%;
+            animation: wave-effect 2s infinite linear;
+        }
+
+        @keyframes spin-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 15s linear infinite;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* إخفاء العناصر عند الطباعة */
+        @media print {
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="font-cairo antialiased min-h-screen">
+
+    <!-- شاشة تأكيد النجاح (Confetti Overlay) -->
+    <div id="confetti-overlay" class="fixed inset-0 z-[200] pointer-events-none flex items-center justify-center bg-blue-950/20 backdrop-blur-md transition-all animate-pulse hidden no-print">
+        <div class="bg-[#1E3A8A] border-4 border-[#D4AF37] p-8 rounded-3xl text-center shadow-2xl max-w-md mx-4 pointer-events-auto">
+            <span class="text-6xl block mb-4 animate-bounce">𓋹</span>
+            <h4 id="confetti-title" class="text-[#D4AF37] font-black text-2xl mb-2">تمت الموافقة الأمنية!</h4>
+            <p id="confetti-msg" class="text-white font-bold text-sm leading-relaxed"></p>
+        </div>
+    </div>
+
+    <!-- النافذة المنبثقة (Modal) الأساسية -->
+    <div id="main-modal" class="fixed inset-0 z-[150] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden no-print animate-fade-in" onclick="if(event.target === this) closeModal()">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border-2 border-[#D4AF37]">
+            <div id="modal-header" class="p-4 bg-[#1E3A8A] text-white flex justify-between items-center">
+                <h3 class="font-bold text-lg flex items-center gap-2">
+                    <i data-lucide="shield-check" class="text-[#D4AF37] w-5 h-5"></i>
+                    <span id="modal-title"></span>
+                </h3>
+                <button onclick="closeModal()" class="hover:text-gray-300 transition-colors cursor-pointer"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            
+            <div class="p-6" id="modal-body">
+                <!-- المحتوى يتغير ديناميكياً (فورم تسجيل الدخول أو رسائل نصية) -->
+            </div>
+            
+            <div id="modal-footer" class="bg-gray-50 p-4 border-t flex justify-end">
+                <button onclick="closeModal()" class="px-5 py-2 bg-slate-200 text-slate-800 rounded-lg font-bold hover:bg-slate-300 transition cursor-pointer text-xs" data-i18n="closeBtn">
+                    إغلاق النافذة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- الرأس (Header) -->
+    <header class="sticky top-0 z-50 bg-[#1E3A8A] text-white shadow-md border-b-4 border-[#D4AF37] no-print">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            
+            <!-- الشعار -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-[#D4AF37] to-amber-500 rounded-full flex justify-center items-center font-black text-[#1E3A8A] text-2xl shadow-md border-2 border-white animate-spin-slow">
+                    𓋹
+                </div>
+                <div dir="ltr" class="text-left">
+                    <h1 class="text-2xl font-black tracking-wider flex items-center gap-1 leading-none">
+                        Kemet <span class="text-[#D4AF37]">Pass</span>
+                    </h1>
+                    <p class="text-[9px] text-amber-200 font-medium tracking-widest hidden sm:block mt-1 uppercase">SOVEREIGN NATIONAL DIGITAL TOURISM INTERACTIVE PORTAL</p>
+                </div>
+            </div>
+
+            <!-- أزرار التحكم -->
+            <div class="flex items-center gap-2">
+                
+                <!-- زر المكفوفين -->
+                <button id="btn-blind-mode" onclick="toggleBlindMode()" class="p-2.5 rounded-xl transition-all border-2 cursor-pointer bg-[#152e6f] text-[#D4AF37] border-transparent hover:border-amber-400" title="Voice Guide">
+                    <i data-lucide="mic" class="w-4 h-4"></i>
+                </button>
+
+                <!-- زر الصم والبكم -->
+                <button id="btn-deaf-mode" onclick="toggleDeafMode()" class="p-2.5 rounded-xl transition-all border-2 cursor-pointer bg-[#152e6f] text-[#D4AF37] border-transparent hover:border-amber-400" title="Sign Language Assistant">
+                    <i data-lucide="eye" class="w-4 h-4"></i>
+                </button>
+
+                <!-- قائمة اللغات -->
+                <div class="relative">
+                    <button id="btn-lang-toggle" onclick="toggleLangMenu(event)" class="flex items-center gap-1 hover:text-[#D4AF37] transition font-bold px-3 py-2 rounded-xl bg-[#152e6f] border border-blue-800 text-sm cursor-pointer">
+                        <i data-lucide="globe" class="text-[#D4AF37] w-4 h-4"></i> <span id="current-lang-text">AR</span> <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                    </button>
+                    <div id="lang-menu" class="hidden absolute top-full mt-2 w-48 bg-white rounded-xl shadow-2xl overflow-hidden text-gray-800 border-2 border-[#D4AF37] z-50 left-0 rtl:right-0 rtl:left-auto">
+                        <button onclick="setLanguage('AR')" class="block w-full text-right px-4 py-2.5 hover:bg-amber-50 text-xs font-bold transition">العربية 🇪🇬</button>
+                        <button onclick="setLanguage('EN')" class="block w-full text-left px-4 py-2.5 hover:bg-amber-50 text-xs font-bold transition">English 🇬🇧</button>
+                        <button onclick="setLanguage('FR')" class="block w-full text-left px-4 py-2.5 hover:bg-amber-50 text-xs font-bold transition">Français 🇫🇷</button>
+                        <button onclick="setLanguage('DE')" class="block w-full text-left px-4 py-2.5 hover:bg-amber-50 text-xs font-bold transition">Deutsch 🇩🇪</button>
+                        <button onclick="setLanguage('RU')" class="block w-full text-left px-4 py-2.5 hover:bg-amber-50 text-xs font-bold transition">Русский 🇷🇺</button>
+                        <button onclick="setLanguage('IT')" class="block w-full text-left px-4 py-2.5 hover:bg-amber-50 text-xs font-bold transition">Italiano 🇮🇹</button>
+                        <button onclick="setLanguage('ES')" class="block w-full text-left px-4 py-2.5 hover:bg-amber-50 text-xs font-bold transition">Español 🇪🇸</button>
+                    </div>
+                </div>
+
+                <!-- حالة الاعتماد أو زر الدخول -->
+                <div id="auth-status-container">
+                    <!-- يملأ بواسطة الجافاسكربت -->
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- شريط الاستغاثة SOS -->
+    <div class="bg-red-50 border-b border-red-200 py-3 px-4 shadow-sm no-print">
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <span class="w-3 h-3 bg-red-600 rounded-full animate-ping"></span>
+                <i data-lucide="shield-alert" class="text-red-600 w-6 h-6"></i>
+                <div>
+                    <p class="text-sm font-bold text-red-700" data-i18n="sosTitle">نظام الاستغاثة السريع SOS</p>
+                    <p id="sos-status" class="text-xs text-red-500 font-semibold mt-0.5 hidden"></p>
+                </div>
+            </div>
+            <button onclick="triggerSOS()" id="btn-sos" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-xl font-bold text-sm shadow-md flex items-center gap-2 transition cursor-pointer">
+                <i data-lucide="phone-call" class="w-4 h-4"></i> <span data-i18n="sosBtn">استغاثة عاجلة (SOS)</span>
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <!-- القسم الرئيسي (البحث) -->
+        <section id="hero" class="relative bg-[#1E3A8A] text-white py-20 px-4 overflow-hidden no-print">
+            <div class="container mx-auto text-center relative z-10 max-w-3xl">
+                <h2 class="text-4xl md:text-5xl font-black mb-6 leading-tight" data-i18n="heroTitle">اكتشف سحر كيميت بأمان ورفاهية</h2>
+                <p class="text-lg md:text-xl text-blue-100 mb-10" data-i18n="heroSub">بوابتك الرقمية السيادية الموحدة لرحلة سياحية مؤمنة ومعتمدة</p>
+                
+                <div class="bg-white p-2.5 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center gap-2">
+                    <div class="flex-1 flex items-center gap-2 w-full px-4 py-2 text-slate-800">
+                        <i data-lucide="search" class="text-gray-400 w-5 h-5"></i>
+                        <input type="text" id="main-search-input" class="w-full bg-transparent border-none text-gray-800 focus:outline-none font-semibold text-sm" placeholder="ابحث عن مستشفيات GAHAR، أو منشآت القائمة البيضاء..." data-i18n-placeholder="searchPlaceholder" oninput="handleSearch()">
+                    </div>
+                    <button onclick="scrollToSection('listings')" class="w-full sm:w-auto bg-gradient-to-r from-[#D4AF37] to-amber-500 text-[#1E3A8A] px-8 py-3.5 rounded-xl font-black hover:shadow-lg transition cursor-pointer" data-i18n="searchBtn">
+                        بحث فوري
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- شركاء النجاح -->
+        <section id="trust" class="py-8 bg-white border-b border-gray-100 no-print">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-6" data-i18n="trustTitle">منظومة قومية متكاملة تحت رعاية الدولة المصرية</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition">
+                        <i data-lucide="shield" class="text-[#1E3A8A] w-8 h-8"></i>
+                        <span class="text-xs font-bold text-gray-700" data-i18n="moi">وزارة الداخلية (أمان)</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition">
+                        <i data-lucide="heart-pulse" class="text-emerald-600 w-8 h-8"></i>
+                        <span class="text-xs font-bold text-gray-700" data-i18n="gahar">الاعتماد الصحي (GAHAR)</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition">
+                        <i data-lucide="utensils" class="text-amber-500 w-8 h-8"></i>
+                        <span class="text-xs font-bold text-gray-700" data-i18n="nfsa">سلامة الغذاء (NFSA)</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition">
+                        <i data-lucide="award" class="text-[#D4AF37] w-8 h-8"></i>
+                        <span class="text-xs font-bold text-gray-700" data-i18n="mota">وزارة السياحة والآثار</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- المنشآت المعتمدة -->
+        <section id="listings" class="py-12 bg-slate-50 no-print">
+            <div class="container mx-auto px-4">
+                
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8 border-b border-gray-200 pb-6">
+                    <div>
+                        <h3 class="text-3xl font-black text-[#1E3A8A] mb-2" data-i18n="listingsTitle">المنشآت المعتمدة</h3>
+                        <p class="text-gray-500 font-medium text-sm"><span id="listings-count">8</span> <span data-i18n="viewAll">عرض كافة المنشآت المعتمدة</span></p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2" id="category-filters">
+                        <!-- تُضاف الأزرار ديناميكياً عبر JS -->
+                    </div>
+                </div>
+
+                <div id="listings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- تُضاف الكروت ديناميكياً عبر JS -->
+                </div>
+                
+                <div id="no-results" class="hidden text-center py-10 text-gray-500 font-bold" data-i18n="noResults">
+                    لم يتم العثور على نتائج مطابقة لبحثك.
+                </div>
+            </div>
+        </section>
+
+        <!-- بطاقة التأمين الموحدة -->
+        <section id="insurance-section" class="py-16 bg-[#0B132B] text-white relative">
+            <div class="container mx-auto px-4 flex flex-col items-center">
+                <!-- المحتوى يتبدل بين طلب التسجيل والبطاقة الرسمية عبر JS -->
+                <div id="insurance-content" class="w-full max-w-2xl"></div>
+            </div>
+        </section>
+
+        <!-- قاموس لغة الإشارة -->
+        <section id="sign-language" class="py-16 bg-white border-t border-b border-gray-100 no-print">
+            <div class="container mx-auto px-4">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="bg-amber-100 text-[#1E3A8A] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider" data-i18n="a11yDeaf">مساعد لغة الإشارة</span>
+                    <h3 class="text-3xl font-black text-[#1E3A8A] mt-3 mb-2" data-i18n="signLanguageTitle">القاموس الإشاري</h3>
+                    <p class="text-gray-500 font-medium text-sm" data-i18n="signLanguageSub">ترجمة مرئية للمصطلحات</p>
+                </div>
+
+                <div class="max-w-md mx-auto mb-10">
+                    <div class="bg-slate-50 border-2 border-slate-200 p-2 rounded-xl flex items-center gap-2">
+                        <i data-lucide="search" class="text-slate-400 w-4 h-4"></i>
+                        <input type="text" id="dict-search-input" class="w-full bg-transparent border-none text-gray-800 focus:outline-none font-medium text-sm" data-i18n-placeholder="searchDict" placeholder="ابحث عن مصطلح سياحي..." oninput="handleDictSearch()">
+                    </div>
+                </div>
+
+                <div id="sign-dict-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- يملأ ديناميكياً -->
+                </div>
+            </div>
+        </section>
+
+        <!-- قنوات الدعم والتواصل -->
+        <section id="support" class="py-12 bg-white border-t border-b border-gray-100 no-print">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h3 class="text-2xl font-black text-[#1E3A8A] text-center mb-8" data-i18n="contactTitle">قنوات التواصل الرسمية</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+                        <div class="p-3 bg-blue-100 text-[#1E3A8A] rounded-xl text-xl">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-gray-500 uppercase" data-i18n="contactEmail">البريد الإلكتروني المباشر</h4>
+                            <a href="mailto:mostafasalem466@gmail.com" class="text-sm text-blue-700 font-bold mt-1 block hover:underline">mostafasalem466@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+                        <div class="p-3 bg-amber-100 text-amber-700 rounded-xl text-xl">
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-gray-500 uppercase" data-i18n="contactPhone">هاتف الدعم</h4>
+                            <a href="tel:+201008333400" class="text-sm text-amber-700 font-bold mt-1 block hover:underline" dir="ltr">+201008333400</a>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+                        <div class="p-3 bg-blue-50 text-blue-600 rounded-xl text-xl">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-gray-500 uppercase">LinkedIn</h4>
+                            <a href="https://www.linkedin.com/in/mostafasalem466" target="_blank" class="text-sm text-blue-600 font-bold mt-1 block hover:underline">Eng. Mostafa Salem</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- واجهة المساعد الصوتي للمكفوفين (Blind Mode) -->
+    <div id="blind-widget" class="fixed bottom-6 left-6 right-6 md:right-auto md:w-96 bg-red-600 text-white rounded-2xl shadow-2xl border-4 border-red-800 overflow-hidden z-[100] hidden no-print">
+        <div class="p-6 text-center relative">
+            <button onclick="toggleBlindMode()" class="absolute top-3 right-3 text-white opacity-70 hover:opacity-100 cursor-pointer"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <div class="relative inline-block mb-4" id="mic-animation-container">
+                <div class="w-16 h-16 bg-red-800 rounded-full flex justify-center items-center text-white text-2xl mx-auto shadow-inner">
+                    <i data-lucide="mic" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <h4 class="font-black text-lg mb-1" data-i18n="a11yBlind">المساعد الصوتي</h4>
+            <p class="text-xs font-medium mb-4 opacity-95" data-i18n="speechActiveMsg">استمع إليك الآن...</p>
+            
+            <button onclick="handleVoiceListening()" id="btn-voice-listen" class="w-full py-3 rounded-xl font-black text-xs transition bg-red-900 text-white hover:bg-red-950 cursor-pointer">
+                اضغط هنا للتحدث
+            </button>
+
+            <div id="voice-text-result" class="mt-4 p-3 bg-red-950/40 rounded-xl text-xs font-bold text-amber-200 border border-red-800 flex items-center gap-2 hidden">
+                <i data-lucide="volume-2" class="w-4 h-4 animate-bounce"></i>
+                <span id="voice-text-content"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- واجهة مساعد لغة الإشارة (Horus Chat) -->
+    <div id="horus-widget" class="fixed bottom-6 right-6 bg-white rounded-2xl shadow-2xl border-4 border-[#D4AF37] overflow-hidden z-[100] hidden flex-col max-h-[480px] w-80 sm:w-96 no-print">
+        <div class="bg-[#1E3A8A] text-white p-4 font-black flex justify-between items-center">
+            <span class="flex items-center gap-2"><i data-lucide="eye" class="text-[#D4AF37] w-4 h-4"></i> <span data-i18n="deafChatTitle">دردشة حورس</span></span>
+            <button class="cursor-pointer hover:text-gray-300" onclick="toggleDeafMode()"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+        
+        <div id="horus-chat-history" class="p-4 space-y-3 overflow-y-auto h-64 bg-slate-50/50 flex-1">
+            <!-- رسائل الشات تضاف ديناميكياً -->
+        </div>
+
+        <div id="horus-suggestions" class="p-2 border-t border-slate-100 bg-white flex gap-1.5 overflow-x-auto whitespace-nowrap scrollbar-hide">
+            <!-- اقتراحات الأسئلة -->
+        </div>
+
+        <form id="horus-form" class="p-3 border-t border-slate-200 bg-slate-50 flex items-center gap-2" onsubmit="handleHorusSubmit(event)">
+            <input type="text" id="horus-input" class="flex-1 bg-white border border-slate-200 p-2 text-xs rounded-xl focus:outline-none focus:border-[#D4AF37] font-semibold" data-i18n-placeholder="askHorusPlaceholder" placeholder="اسأل حورس...">
+            <button type="submit" class="bg-[#1E3A8A] text-white p-2 rounded-xl hover:bg-blue-900 transition cursor-pointer">
+                <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="bg-[#1E3A8A] text-white py-12 border-t-4 border-[#D4AF37] no-print">
+        <div class="container mx-auto px-4 text-center md:text-right rtl:md:text-right ltr:md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-blue-800 pb-8 mb-8">
+                <div class="flex items-center gap-3">
+                    <span class="text-4xl text-[#D4AF37]">𓋹</span>
+                    <div>
+                        <h4 class="font-black text-xl text-[#D4AF37]">Kemet Pass System</h4>
+                        <p class="text-xs text-blue-200" data-i18n="copyrightSubtitle">مسجل ومحمي رسمياً</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end gap-2">
+                    <span class="text-[10px] text-[#D4AF37] font-bold uppercase" data-i18n="copyrightTitle">حقوق الطبع والنشر</span>
+                    <a class="copyrighted-badge block transition-transform hover:scale-105" title="Copyrighted.com Registered &amp; Protected" target="_blank" href="https://app.copyrighted.com/work/f8434HrVyoSLfh3o/">
+                        <img alt="Copyrighted" border="0" width="125" height="25" src="https://static.copyrighted.com/badges/125x25/06_1.png" />
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-blue-200 max-w-2xl mx-auto md:mx-0 leading-relaxed mb-6 font-medium text-xs" data-i18n="footerDesc">
+                Kemet Pass هي البوابة الوطنية...
+            </p>
+
+            <div class="border-t border-blue-900/60 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold text-blue-300 gap-2">
+                <p>© 2024-2026 Kemet Pass. All Rights Reserved.</p>
+                <p class="whitespace-nowrap"><span data-i18n="management">حقوق الملكية الفكرية</span>: Eng. Mostafa Hamed Salem</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- المنطق والبيانات (JavaScript) -->
+    <script>
+        // --- 1. البيانات الأساسية والنصوص (Translations Data) ---
+        const translations = {
+            AR: {
+                dir: 'rtl', font: 'font-cairo', home: "الرئيسية", bookings: "الخدمات المعتمدة", insurance: "بوليصة التأمين الموحدة", accreditations: "شركاء النجاح السياديين", login: "تسجيل فحص الجوازات (أمان)", a11yBlind: "المساعد الصوتي للمكفوفين (حقيقي)", a11yDeaf: "مساعد لغة الإشارة (حورس)", avatarDeafMsg: "أهلاً بك! أنا المساعد الذكي 'حورس'، اسألني أي سؤال سياحي وسأجيبك فورياً بلغة الإشارة.", avatarBlindMsg: "المساعد الصوتي للمكفوفين نشط الآن. اضغط على زر الميكروفون بالأسفل وتحدث فوراً وسأقوم بالرد الصوتي الذكي عليك.", heroTitle: "اكتشف سحر كيميت بأمان ورفاهية", heroSub: "بوابتك الرقمية السيادية الموحدة لرحلة سياحية مؤمنة ومعتمدة بالكامل في جمهورية مصر العربية", searchPlaceholder: "ابحث عن مستشفيات GAHAR، أو منشآت القائمة البيضاء...", searchBtn: "بحث فوري", trustTitle: "منظومة قومية متكاملة تحت رعاية الدولة المصرية", moi: "وزارة الداخلية (أمان)", gahar: "الاعتماد الصحي (GAHAR)", nfsa: "سلامة الغذاء (NFSA)", mota: "وزارة السياحة والآثار", listingsTitle: "المنشآت المعتمدة والمدرجة بالقوائم البيضاء", viewAll: "عرض كافة المنشآت المعتمدة", bookBtn: "حجز الخدمة المعتمدة", paymentTitle: "بوابات الدفع الإلكتروني المؤمنة", footerDesc: "Kemet Pass هي البوابة الوطنية الذكية والملك الفكري الحصري للمهندس مصطفى حامد سالم، صممت لتدمج الأمان والصحة والرفاهية لضمان تجربة سياحية فريدة تتوافق مع رؤية مصر 2030 و 2032.", management: "حقوق الملكية الفكرية والتصميم والتنفيذ", securityCheck: "يتم الآن التدقيق الأمني اللحظي الفوري مع قواعد بيانات وزارة الداخلية...", successMsg: "تمت الموافقة الأمنية بنجاح وصدرت بوليصة التأمين الموحدة الرقمية لجمهورية مصر العربية!", securityReq: "إشعار أمني هام: يرجى إتمام عملية فحص وتدقيق الجواز أولاً عبر تسجيل الدخول لتفعيل بوليصة التأمين الموحدة وحجز الخدمات.", paymentRedirect: "جاري توجيهك بأمان كامل إلى بوابة الدفع الوطنية المؤمنة لـ:", listening: "جاري الاستماع لصوتك بدقة... تحدث الآن بكل وضوح", dictionaryTitle: "مساعد حورس التفاعلي للغة الإشارة", searchDict: "ابحث عن مصطلح سياحي لترجمته فورياً لخطوات لغة الإشارة...", dictDesc: "طريقة أداء الحركة الإشارية الحركية:", sosTitle: "نظام الاستغاثة السريع SOS والأمن القومي", sosBtn: "استغاثة عاجلة (SOS)", sosSending: "جاري بث إحداثياتك الجغرافية المشفرة عبر الأقمار الصناعية لغرف الإغاثة الطارئة...", sosSuccess: "تم إرسال نداء الاستغاثة لشرطة السياحة والإسعاف المصري بنجاح! طاقم التدخل السريع في طريقه لموقعك الجغرافي الآن.", insuranceTitle: "بوليصة التأمين الصحي والأمني الرقمية الموحدة", insuranceHolder: "الاسم المستفيد (حامل البوليصة)", insuranceStatus: "حالة وثيقة التأمين", insuranceActive: "نشط ومؤمن بالكامل بالمنظومة السيادية (أمان)", insuranceID: "رقم البوليصة الموحد لجمهورية مصر العربية", passportPlace: "أدخل رقم جواز السفر الدولي الخاص بك...", nationalityPlace: "أدخل جنسيتك الحالية...", submitVetting: "تأكيد وإصدار بوليصة التأمين الموحدة", closeBtn: "إغلاق النافذة", sharePass: "مشاركة كود المرور الموحد", linkCopied: "تم نسخ رابط التحقق بنجاح!", passportLabel: "رقم جواز السفر الدولي", nationalityLabel: "الجنسية الحالية للسائح", cardTitle: "بطاقة تأمين KEMET PASS الموحدة", cardSubtitle: "نظام الحماية الرقمي السيادي المتكامل", qrTitle: "كود التحقق والاستجابة الفورية", qrSubtitle: "يتيح للمستشفيات المعتمدة المعالجة الطبية الفورية والتحقق الأمني", holderName: "المهندس / مصطفى حامد سالم", citizenEgypt: "مصري 🇪🇬", printBtn: "طباعة الحجز والوثيقة (PDF)", printTitle: "سند حجز وتأمين Kemet Pass رسمي وموثق", printStamp: "ختم الاعتماد الرقمي لجمهورية مصر العربية", printSecurityToken: "رمز الفحص الأمني المشفر لوزارة الداخلية (أمان):", deafChatTitle: "دردشة حورس الذكية الفورية للغة الإشارة", askHorusPlaceholder: "ابحث أو اطرح سؤالك بلغة الإشارة...", typeLogin: "تسجيل الدخول الأمني وتدقيق الجواز", pleaseWait: "يرجى الانتظار...", regFullNameLabel: "الاسم الكامل (كما هو في جواز السفر)", regFullNamePlace: "أدخل اسمك بالكامل هنا...", signLanguageTitle: "القاموس الإشاري التفاعلي الموحد (صم وبكم)", signLanguageSub: "ترجمة فورية مرئية لأهم المصطلحات والبروتوكولات السياحية", validationErrorName: "يرجى إدخال اسمك الثنائي على الأقل.", validationErrorPassport: "يرجى إدخال رقم جواز سفر صحيح.", validationErrorNationality: "يرجى إدخال جنسيتك.", allCategories: "الكل", healthCategory: "منشآت صحية معتمدة (GAHAR)", hotelCategory: "فنادق القائمة البيضاء (NFSA)", foodCategory: "مطاعم القائمة البيضاء (NFSA)", cultureCategory: "بوابات تذكرتي السيادية", noResults: "لم يتم العثور على نتائج مطابقة لبحثك.", contactTitle: "قنوات التواصل الرسمية والدعم الفني", contactEmail: "البريد الإلكتروني المباشر", contactPhone: "هاتف الدعم الدولي العاجل", copyrightTitle: "حقوق الطبع والنشر والملكية الفكرية", copyrightSubtitle: "مسجل ومحمي رسمياً بموجب القوانين والاتفاقيات الدولية", speechSupportError: "متصفحك الحالي لا يدعم ميزة التعرف على الصوت. يرجى التحديث.", speechActiveMsg: "المساعد الصوتي يستمع إليك الآن... قل: 'مستشفى' أو 'أمان' أو 'استغاثة'."
+            },
+            EN: {
+                dir: 'ltr', font: 'font-jakarta', home: "Home", bookings: "Certified Gates", insurance: "Unified Insurance", accreditations: "Sovereign Partners", login: "Passport Security Vetting", a11yBlind: "Voice Guide (Live Mic)", a11yDeaf: "Sign Language Assistant", avatarDeafMsg: "Welcome! I am Horus, your conversational tourist sign-language AI assistant. Ask me anything!", avatarBlindMsg: "Blind voice assistance activated. Tap the microphone below, speak your query.", heroTitle: "Discover Kemet Safely & Securely", heroSub: "Your unified sovereign digital gateway for a fully secured tourism experience in Egypt", searchPlaceholder: "Search GAHAR hospitals, NFSA whitelisted hotels...", searchBtn: "Instant Search", trustTitle: "Integrated National System Sponsored by the Egyptian State", moi: "Ministry of Interior (Aman)", gahar: "GAHAR Healthcare Quality", nfsa: "Food Safety (NFSA)", mota: "Ministry of Tourism", listingsTitle: "Certified & Whitelisted Facilities", viewAll: "View All Whitelisted Facilities", bookBtn: "Book Certified Service", paymentTitle: "Secured Payment Gateways", footerDesc: "Kemet Pass is the National Smart Portal and exclusive Intellectual Property of Eng. Mostafa Hamed Salem, combining security, health, and luxury in perfect alignment with Egypt Vision 2030 & 2032.", management: "IP & Strategic Design Management", securityCheck: "Performing real-time secure database screening with Ministry of Interior...", successMsg: "Security Approved! Your Unified Digital Insurance Policy has been officially generated.", securityReq: "Security Warning: Please complete passport verification first to activate your insurance policy.", paymentRedirect: "Safely redirecting to secure national payment gateway for:", listening: "Listening carefully... Speak now", dictionaryTitle: "Horus Interactive Sign Language Assistant", searchDict: "Search for tourist terms to translate...", dictDesc: "Kinematic Sign Execution Protocol:", sosTitle: "Emergency SOS Rapid Satellite Broadcast", sosBtn: "Emergency SOS", sosSending: "Broadcasting encrypted GPS coordinates to rescue headquarters...", sosSuccess: "SOS transmission successful! Tourist Police and Ambulance are en route to your exact location.", insuranceTitle: "Unified Digital Health & Security Insurance Policy", insuranceHolder: "Beneficiary (Policy Holder)", insuranceStatus: "Insurance Validity Status", insuranceActive: "Active & Fully Insured (Sovereign Verified)", insuranceID: "Unified National Security Policy ID", passportPlace: "Enter passport number...", nationalityPlace: "Select nationality...", submitVetting: "Verify & Issue Policy", closeBtn: "Close Window", sharePass: "Share Access Code", linkCopied: "Link copied successfully!", passportLabel: "International Passport Number", nationalityLabel: "Current Tourist Nationality", cardTitle: "KEMET PASS UNIFIED INSURANCE CARD", cardSubtitle: "INTEGRATED SOVEREIGN DIGITAL PROTECTION SYSTEM", qrTitle: "Instant Verification QR-Code", qrSubtitle: "Provides accredited GAHAR hospitals immediate clinical processing", holderName: "Eng. Mostafa Hamed Salem", citizenEgypt: "Egyptian 🇪🇬", printBtn: "Print Booking & Policy (PDF)", printTitle: "Official Kemet Pass Document", printStamp: "Sovereign Digital Accreditation Stamp of Egypt", printSecurityToken: "Ministry of Interior Secure Security Token (Aman):", deafChatTitle: "Horus Conversational AI Sign Chat", askHorusPlaceholder: "Ask Horus or Search...", typeLogin: "Security Vetting", pleaseWait: "Please wait...", regFullNameLabel: "Full Name (As shown in Passport)", regFullNamePlace: "Enter your full name...", signLanguageTitle: "Unified Sign Language Dictionary", signLanguageSub: "Real-time visual translation of vital tourist concepts", validationErrorName: "Please enter your full name.", validationErrorPassport: "Please enter a valid passport number.", validationErrorNationality: "Please enter your current nationality.", allCategories: "All", healthCategory: "GAHAR Healthcare", hotelCategory: "White List Hotels", foodCategory: "NFSA Food Safety", cultureCategory: "Culture Sites", noResults: "No matched results for your query.", contactTitle: "Official Support Channels", contactEmail: "Direct E-mail", contactPhone: "Emergency Hot Support Phone", copyrightTitle: "Copyright & Intellectual Property Rights", copyrightSubtitle: "Officially Registered & Protected Under International Laws", speechSupportError: "Speech Recognition is not supported on this browser.", speechActiveMsg: "Voice guide is listening... Speak keywords like: 'Hospital', 'Security', or 'SOS'."
+            },
+            FR: {
+                dir: 'ltr', font: 'font-jakarta', home: "Accueil", bookings: "Portes certifiées", insurance: "Assurance Unifiée", accreditations: "Partenaires Souverains", login: "Vérification de sécurité", a11yBlind: "Guide Vocal", a11yDeaf: "Assistant en langue des signes", avatarDeafMsg: "Bienvenue ! Je suis Horus, votre assistant en langue des signes. Posez-moi vos questions !", avatarBlindMsg: "Assistance vocale activée. Appuyez sur le microphone ci-dessous et parlez.", heroTitle: "Découvrez Kemet en toute sécurité", heroSub: "Votre portail numérique souverain unifié pour une expérience touristique sécurisée en Égypte", searchPlaceholder: "Rechercher des hôpitaux GAHAR, hôtels sur liste blanche...", searchBtn: "Recherche instantanée", trustTitle: "Système national intégré parrainé par l'État", moi: "Ministère de l'Intérieur", gahar: "Qualité des soins GAHAR", nfsa: "Sécurité alimentaire", mota: "Ministère du Tourisme", listingsTitle: "Établissements certifiés", viewAll: "Voir tous les établissements", bookBtn: "Réserver un service", paymentTitle: "Passerelles de paiement sécurisées", footerDesc: "Kemet Pass est le portail intelligent national, combinant sécurité, santé et luxe.", management: "Gestion IP et conception", securityCheck: "Vérification sécurisée en temps réel...", successMsg: "Sécurité approuvée ! Votre police d'assurance numérique a été générée.", securityReq: "Avertissement : Veuillez d'abord compléter la vérification du passeport.", paymentRedirect: "Redirection sécurisée vers la passerelle de paiement pour :", listening: "Écoute attentive... Parlez maintenant", dictionaryTitle: "Assistant interactif Horus", searchDict: "Rechercher des termes touristiques...", dictDesc: "Protocole d'exécution du signe :", sosTitle: "Diffusion d'urgence SOS", sosBtn: "Urgence SOS", sosSending: "Diffusion des coordonnées GPS chiffrées...", sosSuccess: "Transmission SOS réussie ! La police et l'ambulance sont en route.", insuranceTitle: "Police d'assurance numérique unifiée", insuranceHolder: "Bénéficiaire", insuranceStatus: "Statut de l'assurance", insuranceActive: "Active et entièrement assurée", insuranceID: "ID de la politique unifiée", passportPlace: "Entrez le numéro de passeport...", nationalityPlace: "Sélectionnez la nationalité...", submitVetting: "Vérifier et émettre la police", closeBtn: "Fermer la fenêtre", sharePass: "Partager le code", linkCopied: "Lien copié avec succès !", passportLabel: "Numéro de passeport", nationalityLabel: "Nationalité", cardTitle: "CARTE D'ASSURANCE KEMET PASS", cardSubtitle: "SYSTÈME DE PROTECTION NUMÉRIQUE INTÉGRÉ", qrTitle: "Code QR de vérification", qrSubtitle: "Vérification immédiate", holderName: "Ing. Mostafa Hamed Salem", citizenEgypt: "Égyptien 🇪🇬", printBtn: "Imprimer (PDF)", printTitle: "Document Officiel", printStamp: "Timbre d'accréditation numérique", printSecurityToken: "Jeton de sécurité :", deafChatTitle: "Chat Horus Sign Language", askHorusPlaceholder: "Demandez à Horus ou recherchez...", typeLogin: "Vérification de sécurité", pleaseWait: "Veuillez patienter...", regFullNameLabel: "Nom complet", regFullNamePlace: "Entrez votre nom complet...", signLanguageTitle: "Dictionnaire Unifié des Signes", signLanguageSub: "Traduction visuelle en temps réel", validationErrorName: "Veuillez entrer votre nom complet.", validationErrorPassport: "Veuillez entrer un passeport valide.", validationErrorNationality: "Veuillez entrer votre nationalité.", allCategories: "Tout", healthCategory: "Soins GAHAR", hotelCategory: "Hôtels", foodCategory: "Sécurité NFSA", cultureCategory: "Sites Culturels", noResults: "Aucun résultat correspondant.", contactTitle: "Canaux de support", contactEmail: "E-mail direct", contactPhone: "Téléphone d'urgence", copyrightTitle: "Droits d'auteur", copyrightSubtitle: "Officiellement enregistré", speechSupportError: "La reconnaissance vocale n'est pas prise en charge.", speechActiveMsg: "Le guide vocal écoute... Dites 'Hôpital', 'Sécurité' ou 'SOS'."
+            },
+            DE: {
+                dir: 'ltr', font: 'font-jakarta', home: "Startseite", bookings: "Zertifizierte Tore", insurance: "Einheitliche Versicherung", accreditations: "Souveräne Partner", login: "Sicherheitsprüfung", a11yBlind: "Sprachführung", a11yDeaf: "Gebärdensprache Assistent", avatarDeafMsg: "Willkommen! Ich bin Horus, Ihr Assistent für Gebärdensprache.", avatarBlindMsg: "Sprachassistenz aktiviert. Tippen Sie unten auf das Mikrofon.", heroTitle: "Entdecken Sie Kemet sicher", heroSub: "Ihr souveränes digitales Gateway für ein sicheres Erlebnis in Ägypten", searchPlaceholder: "Suchen Sie nach GAHAR-Krankenhäusern...", searchBtn: "Sofortsuche", trustTitle: "Integriertes nationales System", moi: "Innenministerium", gahar: "GAHAR Gesundheitsqualität", nfsa: "Lebensmittelsicherheit (NFSA)", mota: "Tourismusministerium", listingsTitle: "Zertifizierte Einrichtungen", viewAll: "Alle Einrichtungen anzeigen", bookBtn: "Service buchen", paymentTitle: "Sichere Zahlungs-Gateways", footerDesc: "Kemet Pass ist das nationale intelligente Portal.", management: "IP- und Strategiemanagement", securityCheck: "Sicherheitsüberprüfung in Echtzeit...", successMsg: "Sicherheit genehmigt! Ihre digitale Versicherung wurde erstellt.", securityReq: "Warnung: Bitte schließen Sie zuerst die Passüberprüfung ab.", paymentRedirect: "Sichere Weiterleitung zum Zahlungs-Gateway für:", listening: "Höre genau zu... Sprechen Sie jetzt", dictionaryTitle: "Horus Interaktiver Assistent", searchDict: "Suchen Sie nach touristischen Begriffen...", dictDesc: "Ausführungsprotokoll:", sosTitle: "SOS-Notfall", sosBtn: "SOS-Notfall", sosSending: "GPS-Koordinaten werden gesendet...", sosSuccess: "SOS erfolgreich! Polizei und Krankenwagen sind unterwegs.", insuranceTitle: "Digitale Versicherung", insuranceHolder: "Begünstigter", insuranceStatus: "Versicherungsstatus", insuranceActive: "Aktiv und voll versichert", insuranceID: "Versicherungs-ID", passportPlace: "Passnummer eingeben...", nationalityPlace: "Nationalität auswählen...", submitVetting: "Überprüfen & Ausstellen", closeBtn: "Fenster schließen", sharePass: "Code teilen", linkCopied: "Link erfolgreich kopiert!", passportLabel: "Internationale Passnummer", nationalityLabel: "Aktuelle Nationalität", cardTitle: "KEMET PASS VERSICHERUNGSKARTE", cardSubtitle: "INTEGRIERTES SCHUTZSYSTEM", qrTitle: "QR-Code zur Überprüfung", qrSubtitle: "Sofortige Überprüfung", holderName: "Ing. Mostafa Hamed Salem", citizenEgypt: "Ägyptisch 🇪🇬", printBtn: "Drucken (PDF)", printTitle: "Offizielles Dokument", printStamp: "Digitaler Akkreditierungsstempel", printSecurityToken: "Sicherheits-Token:", deafChatTitle: "Horus Chat", askHorusPlaceholder: "Fragen Sie Horus...", typeLogin: "Sicherheitsprüfung", pleaseWait: "Bitte warten...", regFullNameLabel: "Vollständiger Name", regFullNamePlace: "Namen eingeben...", signLanguageTitle: "Wörterbuch der Gebärdensprache", signLanguageSub: "Visuelle Übersetzung", validationErrorName: "Bitte geben Sie Ihren vollständigen Namen ein.", validationErrorPassport: "Bitte geben Sie einen gültigen Pass ein.", validationErrorNationality: "Bitte geben Sie Ihre Nationalität ein.", allCategories: "Alle", healthCategory: "GAHAR Gesundheit", hotelCategory: "Hotels", foodCategory: "NFSA Sicherheit", cultureCategory: "Kulturstätten", noResults: "Keine passenden Ergebnisse.", contactTitle: "Offizielle Support-Kanäle", contactEmail: "Direkte E-Mail", contactPhone: "Notfall-Telefon", copyrightTitle: "Urheberrecht", copyrightSubtitle: "Offiziell registriert", speechSupportError: "Spracherkennung nicht unterstützt.", speechActiveMsg: "Sprachführung hört zu..."
+            },
+            RU: {
+                dir: 'ltr', font: 'font-jakarta', home: "Главная", bookings: "Сертифицированные врата", insurance: "Единая страховка", accreditations: "Суверенные партнеры", login: "Проверка безопасности", a11yBlind: "Голосовой гид", a11yDeaf: "Судопереводчик", avatarDeafMsg: "Добро пожаловать! Я Гор, ваш помощник.", avatarBlindMsg: "Голосовой помощник активирован. Нажмите на микрофон.", heroTitle: "Откройте для себя Kemet безопасно", heroSub: "Ваш единый цифровой шлюз для безопасного туризма в Египте", searchPlaceholder: "Поиск больниц GAHAR, отелей...", searchBtn: "Быстрый поиск", trustTitle: "Национальная система", moi: "МВД", gahar: "Качество здравоохранения", nfsa: "Безопасность продуктов", mota: "Министерство туризма", listingsTitle: "Сертифицированные объекты", viewAll: "Посмотреть все", bookBtn: "Забронировать", paymentTitle: "Безопасные платежи", footerDesc: "Kemet Pass - национальный умный портал.", management: "Управление IP", securityCheck: "Проверка безопасности в реальном времени...", successMsg: "Одобрено! Ваш страховой полис создан.", securityReq: "Предупреждение: Пожалуйста, завершите проверку паспорта.", paymentRedirect: "Безопасное перенаправление на оплату для:", listening: "Слушаю... Говорите", dictionaryTitle: "Интерактивный помощник Гор", searchDict: "Поиск терминов...", dictDesc: "Протокол жеста:", sosTitle: "Экстренный SOS", sosBtn: "SOS", sosSending: "Отправка GPS-координат...", sosSuccess: "SOS успешен! Полиция и скорая в пути.", insuranceTitle: "Цифровой страховой полис", insuranceHolder: "Бенефициар", insuranceStatus: "Статус страховки", insuranceActive: "Активен", insuranceID: "ID полиса", passportPlace: "Введите номер паспорта...", nationalityPlace: "Выберите гражданство...", submitVetting: "Проверить и выпустить", closeBtn: "Закрыть окно", sharePass: "Поделиться кодом", linkCopied: "Ссылка скопирована!", passportLabel: "Номер паспорта", nationalityLabel: "Гражданство", cardTitle: "СТРАХОВАЯ КАРТА", cardSubtitle: "ИНТЕГРИРОВАННАЯ СИСТЕМА ЗАЩИТЫ", qrTitle: "QR-код для проверки", qrSubtitle: "Мгновенная проверка", holderName: "Инж. Мостафа Хамед Салем", citizenEgypt: "Египтянин 🇪🇬", printBtn: "Печать (PDF)", printTitle: "Официальный документ", printStamp: "Цифровая печать", printSecurityToken: "Токен безопасности:", deafChatTitle: "Гор Чат", askHorusPlaceholder: "Спросите Гора...", typeLogin: "Проверка безопасности", pleaseWait: "Подождите...", regFullNameLabel: "Полное имя", regFullNamePlace: "Введите ваше имя...", signLanguageTitle: "Словарь языка жестов", signLanguageSub: "Визуальный перевод", validationErrorName: "Пожалуйста, введите полное имя.", validationErrorPassport: "Введите действительный паспорт.", validationErrorNationality: "Введите гражданство.", allCategories: "Все", healthCategory: "GAHAR Здоровье", hotelCategory: "Отели", foodCategory: "NFSA Безопасность", cultureCategory: "Культура", noResults: "Нет совпадений.", contactTitle: "Каналы поддержки", contactEmail: "Прямой E-mail", contactPhone: "Телефон экстренной связи", copyrightTitle: "Авторские права", copyrightSubtitle: "Официально зарегистрировано", speechSupportError: "Распознавание речи не поддерживается.", speechActiveMsg: "Голосовой гид слушает..."
+            },
+            IT: {
+                dir: 'ltr', font: 'font-jakarta', home: "Home", bookings: "Porte Certificate", insurance: "Assicurazione Unificata", accreditations: "Partner Sovrani", login: "Controllo di Sicurezza", a11yBlind: "Guida Vocale", a11yDeaf: "Assistente Lingua dei Segni", avatarDeafMsg: "Benvenuto! Sono Horus, il tuo assistente.", avatarBlindMsg: "Assistenza vocale attivata. Tocca il microfono.", heroTitle: "Scopri Kemet in Sicurezza", heroSub: "Il tuo gateway digitale per un'esperienza turistica sicura in Egitto", searchPlaceholder: "Cerca ospedali GAHAR, hotel...", searchBtn: "Ricerca Rapida", trustTitle: "Sistema Nazionale Integrato", moi: "Ministero dell'Interno", gahar: "Qualità Sanitaria GAHAR", nfsa: "Sicurezza Alimentare", mota: "Ministero del Turismo", listingsTitle: "Strutture Certificate", viewAll: "Vedi Tutte", bookBtn: "Prenota", paymentTitle: "Pagamenti Sicuri", footerDesc: "Kemet Pass è il portale intelligente nazionale.", management: "Gestione IP", securityCheck: "Controllo di sicurezza in tempo reale...", successMsg: "Approvato! La tua polizza è stata generata.", securityReq: "Avviso: Completa prima la verifica del passaporto.", paymentRedirect: "Reindirizzamento sicuro al pagamento per:", listening: "Ascolto in corso... Parla ora", dictionaryTitle: "Assistente Interattivo Horus", searchDict: "Cerca termini turistici...", dictDesc: "Protocollo di Esecuzione:", sosTitle: "SOS Emergenza", sosBtn: "SOS", sosSending: "Invio coordinate GPS...", sosSuccess: "SOS inviato con successo! Soccorsi in arrivo.", insuranceTitle: "Polizza Assicurativa Digitale", insuranceHolder: "Beneficiario", insuranceStatus: "Stato Assicurazione", insuranceActive: "Attiva e Assicurata", insuranceID: "ID Polizza", passportPlace: "Inserisci passaporto...", nationalityPlace: "Seleziona nazionalità...", submitVetting: "Verifica ed Emetti", closeBtn: "Chiudi Finestra", sharePass: "Condividi Codice", linkCopied: "Link copiato!", passportLabel: "Numero Passaporto", nationalityLabel: "Nazionalità", cardTitle: "CARTA ASSICURATIVA KEMET PASS", cardSubtitle: "SISTEMA DI PROTEZIONE INTEGRATO", qrTitle: "Codice QR di Verifica", qrSubtitle: "Verifica immediata", holderName: "Ing. Mostafa Hamed Salem", citizenEgypt: "Egiziano 🇪🇬", printBtn: "Stampa (PDF)", printTitle: "Documento Ufficiale", printStamp: "Timbro Digitale", printSecurityToken: "Token di Sicurezza:", deafChatTitle: "Horus Chat", askHorusPlaceholder: "Chiedi a Horus...", typeLogin: "Controllo di Sicurezza", pleaseWait: "Attendere prego...", regFullNameLabel: "Nome Completo", regFullNamePlace: "Inserisci il nome...", signLanguageTitle: "Dizionario Lingua dei Segni", signLanguageSub: "Traduzione Visiva", validationErrorName: "Inserisci il tuo nome completo.", validationErrorPassport: "Inserisci un passaporto valido.", validationErrorNationality: "Inserisci la tua nazionalità.", allCategories: "Tutti", healthCategory: "Salute GAHAR", hotelCategory: "Hotel", foodCategory: "Sicurezza NFSA", cultureCategory: "Siti Culturali", noResults: "Nessun risultato.", contactTitle: "Canali di Supporto", contactEmail: "E-mail Diretta", contactPhone: "Telefono Emergenza", copyrightTitle: "Diritti d'Autore", copyrightSubtitle: "Ufficialmente Registrato", speechSupportError: "Riconoscimento vocale non supportato.", speechActiveMsg: "La guida vocale è in ascolto..."
+            },
+            ES: {
+                dir: 'ltr', font: 'font-jakarta', home: "Inicio", bookings: "Puertas Certificadas", insurance: "Seguro Unificado", accreditations: "Socios Soberanos", login: "Verificación de Seguridad", a11yBlind: "Guía de Voz", a11yDeaf: "Asistente de Lenguaje de Señas", avatarDeafMsg: "¡Bienvenido! Soy Horus, tu asistente.", avatarBlindMsg: "Asistencia de voz activada. Toca el micrófono.", heroTitle: "Descubre Kemet con Seguridad", heroSub: "Tu portal digital para una experiencia turística segura en Egipto", searchPlaceholder: "Buscar hospitales GAHAR, hoteles...", searchBtn: "Búsqueda Rápida", trustTitle: "Sistema Nacional Integrado", moi: "Ministero del Interior", gahar: "Calidad de Salud GAHAR", nfsa: "Seguridad Alimentaria", mota: "Ministerio de Turismo", listingsTitle: "Instalaciones Certificadas", viewAll: "Ver Todo", bookBtn: "Reservar", paymentTitle: "Pagos Seguros", footerDesc: "Kemet Pass es el portal inteligente nacional.", management: "Gestión de PI", securityCheck: "Verificación de seguridad en tiempo real...", successMsg: "¡Aprobado! Tu póliza ha sido generada.", securityReq: "Aviso: Completa primero la verificación del pasaporte.", paymentRedirect: "Redirección segura al pago para:", listening: "Escuchando... Habla ahora", dictionaryTitle: "Asistente Interactivo Horus", searchDict: "Buscar términos turísticos...", dictDesc: "Protocolo de Ejecución:", sosTitle: "SOS de Emergencia", sosBtn: "SOS", sosSending: "Enviando coordenadas GPS...", sosSuccess: "¡SOS enviado con éxito! Ayuda en camino.", insuranceTitle: "Póliza de Seguro Digital", insuranceHolder: "Beneficiario", insuranceStatus: "Estado del Seguro", insuranceActive: "Activo y Asegurado", insuranceID: "ID de Póliza", passportPlace: "Ingresar pasaporte...", nationalityPlace: "Seleccionar nacionalidad...", submitVetting: "Verificar y Emitir", closeBtn: "Cerrar Ventana", sharePass: "Compartir Código", linkCopied: "¡Enlace copiado!", passportLabel: "Número de Pasaporte", nationalityLabel: "Nacionalidad", cardTitle: "TARJETA DE SEGURO KEMET PASS", cardSubtitle: "SISTEMA DE PROTECCIÓN INTEGRADO", qrTitle: "Código QR de Verificación", qrSubtitle: "Verificación inmediata", holderName: "Ing. Mostafa Hamed Salem", citizenEgypt: "Egipcio 🇪🇬", printBtn: "Imprimir (PDF)", printTitle: "Documento Oficial", printStamp: "Sello Digital", printSecurityToken: "Token de Seguridad:", deafChatTitle: "Horus Chat", askHorusPlaceholder: "Pregunta a Horus...", typeLogin: "Verificación de Seguridad", pleaseWait: "Por favor, espera...", regFullNameLabel: "Nombre Completo", regFullNamePlace: "Ingresa tu nombre...", signLanguageTitle: "Diccionario de Lenguaje de Señas", signLanguageSub: "Traducción Visual", validationErrorName: "Ingresa tu nombre completo.", validationErrorPassport: "Ingresa un pasaporte válido.", validationErrorNationality: "Ingresa tu nacionalidad.", allCategories: "Todos", healthCategory: "Salud GAHAR", hotelCategory: "Hoteles", foodCategory: "Seguridad NFSA", cultureCategory: "Sitios Culturales", noResults: "Sin resultados.", contactTitle: "Canales de Soporte", contactEmail: "Correo Directo", contactPhone: "Teléfono de Emergencia", copyrightTitle: "Derechos de Autor", copyrightSubtitle: "Oficialmente Registrado", speechSupportError: "Reconocimiento de voz no soportado.", speechActiveMsg: "La guía de voz está escuchando..."
+            }
+        };
+
+        const destinations = [
+            { id: 1, category: 'health', name: { AR: 'مستشفى شرم الشيخ الدولي (معتمد جهار)', EN: 'Sharm El-Sheikh International Hospital (GAHAR)' }, type: { AR: 'منشأة صحية دولية معتمدة', EN: 'GAHAR Accredited International Hospital' }, gahar: true, foodSafety: false, rating: 4.9, img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=600', details: { AR: "معتمد رسمياً من الهيئة العامة للاعتماد والرقابة الصحية لتقديم أعلى معايير الرعاية العلاجية للسائحين بجمهورية مصر العربية.", EN: "Officially accredited by GAHAR to provide the highest standards of clinical healthcare for tourists in Egypt." } },
+            { id: 2, category: 'health', name: { AR: 'مستشفى دار الفؤاد (معتمد جهار)', EN: 'Dar Al Fouad Hospital (GAHAR)' }, type: { AR: 'مستشفى تخصصي معتمد جهار', EN: 'GAHAR Certified Specialty Hospital' }, gahar: true, foodSafety: false, rating: 4.8, img: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&q=80&w=600', details: { AR: "صرح طبي متكامل وحاصل على اعتماد جهار الوطني الموحد لضمان تقديم العلاج الفوري الفائق والمغطى كلياً بالبوليصة الرقمية.", EN: "A highly accredited clinical fortress under the GAHAR standard, fully integrated with your unified insurance policy." } },
+            { id: 3, category: 'hotel', name: { AR: 'فندق شتايجنبرجر ألكازار (القائمة البيضاء)', EN: 'Steigenberger Alcazar Hotel (NFSA)' }, type: { AR: 'منتجع سياحي معتمد لسلامة الغذاء', EN: 'NFSA Whitelisted Luxury Hotel Resort' }, gahar: false, foodSafety: true, rating: 4.9, img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=600', details: { AR: "مدرج بالكامل في القائمة البيضاء للهيئة القومية لسلامة الغذاء المصرية لضمان مطابقة الوجبات للمعايير الدولية.", EN: "Listed officially on the Egyptian National Food Safety Authority (NFSA) Whitelist, ensuring strict food security." } },
+            { id: 4, category: 'hotel', name: { AR: 'فندق فور سيزونز نايل بلازا (القائمة البيضاء)', EN: 'Four Seasons Nile Plaza - Cairo (NFSA)' }, type: { AR: 'فندق خمس نجوم معتمد صحياً وغذائياً', EN: 'NFSA Whitelisted 5-Star Hotel' }, gahar: false, foodSafety: true, rating: 5.0, img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600', details: { AR: "يجمع بين إطلالة النيل الساحرة وأعلى درجات الرقابة الصحية والغذائية المعتمدة رسمياً.", EN: "Combining breathtaking Nile views with elite hygiene standards verified directly by the Egyptian NFSA." } },
+            { id: 5, category: 'food', name: { AR: 'سلسلة مطاعم سيلانترو (القائمة البيضاء)', EN: 'Cilantro Certified Chain (NFSA)' }, type: { AR: 'سلسلة تجارية معتمدة لسلامة الغذاء', EN: 'NFSA Whitelisted Commercial Dining Chain' }, gahar: false, foodSafety: true, rating: 4.7, img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=600', details: { AR: "مدرجة في القوائم البيضاء لهيئة سلامة الغذاء الوطنية، وتضمن تطبيق أعلى الاشتراطات الصحية لتقديم المشروبات والأغذية.", EN: "Fully compliant and listed on the national whitelists for commercial food chains managed by NFSA." } },
+            { id: 6, category: 'culture', name: { AR: 'المتحف المصري الكبير (تذكرتي)', EN: 'Grand Egyptian Museum (Tazkarti)' }, type: { AR: 'مزار أثري وطني متكامل مع تذكرتي', EN: 'Tazkarti Integrated Archaeological Site' }, gahar: false, foodSafety: false, rating: 5.0, img: 'https://images.unsplash.com/photo-1599839619722-39751411ea63?auto=format&fit=crop&q=80&w=600', details: { AR: "أكبر متحف في العالم مخصص لحضارة واحدة، بواباته الرقمية مربوطة بالكامل مع نظام تذكرتي الموحد لسهولة وسرعة العبور.", EN: "The largest museum in the world dedicated to one civilization, with digital entrance systems tied to Tazkarti." } }
+        ];
+
+        const signDictionary = [
+            { id: 1, word: { AR: "فندق / إقامة", EN: "Hotel / Accommodation" }, sign: "🏨 🫱🫲", desc: { AR: "ضم كفي اليدين معاً بشكل مسطح مائل أسفل الرأس المنحني جانباً (محاكاة وضعية النوم الآمنة).", EN: "Pressing palms flat together under a tilted head to simulate safe sleeping." } },
+            { id: 2, word: { AR: "مستشفى / طوارئ صحية", EN: "Hospital / Emergency" }, sign: "🏥 ➕✋", desc: { AR: "رسم علامة الجمع الجراحية (+) في الهواء بالسبابة ثم إشهار راحة اليد دليلاً على الرعاية الاستشفائية.", EN: "Drawing a plus sign (+) in the air followed by an open palm to indicate certified clinical healthcare." } },
+            { id: 3, word: { AR: "أمان / شرطة السياحة", EN: "Security / Tourism Police" }, sign: "🛡️ ✊👮", desc: { AR: "قبض اليد اليمنى والضرب الخفيف على الجانب الأيمن للصدر بحزم دلالة على تفعيل بروتوكول الحماية والاستقرار.", EN: "Fisting the right hand and tapping the chest firmly representing state protection protocols." } }
+        ];
+
+        const horusQAData = [
+            { question: { AR: "أين تقع أقرب مستشفى معتمدة جهار؟", EN: "Where is the nearest GAHAR accredited hospital?" }, answer: { AR: "مستشفى شرم الشيخ الدولي ومستشفى دار الفؤاد هما من المنشآت المعتمدة كلياً لتقديم رعاية علاجية مؤمنة.", EN: "Sharm El-Sheikh International Hospital and Dar Al Fouad are fully certified GAHAR facilities ready." }, signEmoji: "🏥 ➕ 🫵 📍", signDesc: { AR: "ارسم الصليب الطبي (+) بسبابتك في الهواء، ثم أشر بأصابعك لأسفل للدلالة على الموقع.", EN: "Draw a medical plus (+) sign in the air, then point downwards to indicate the specific location." } },
+            { question: { AR: "كيف أتأكد من سلامة الأطعمة؟", EN: "How do I verify food safety?" }, answer: { AR: "يرجى التحقق من وجود شارة القائمة البيضاء لسلامة الغذاء على صفحة المنشأة.", EN: "Please check for the official NFSA White List badge on the facility's page." }, signEmoji: "🍽️ ✔️ 🛡️ 🟢", signDesc: { AR: "حرك سبابة ووسطى اليد اليمنى على فمك، ثم اصنع علامة (صح) في الهواء.", EN: "Bring your index and middle fingers to your mouth for eating, then sign a checkmark." } }
+        ];
+
+        // --- 2. إدارة الحالة (State Management) ---
+        let currentLang = 'AR';
+        let deafMode = false;
+        let blindMode = false;
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let horusHistory = [];
+        
+        let kpAuth = {
+            isApproved: localStorage.getItem('kp_is_approved') === 'true',
+            name: localStorage.getItem('kp_tourist_name') || '',
+            passport: localStorage.getItem('kp_passport_id') || '',
+            nationality: localStorage.getItem('kp_nationality') || ''
+        };
+
+        // --- 3. الوظائف الأساسية والتحكم في الواجهة ---
+        
+        function getT(key) {
+            return translations[currentLang][key] || translations['EN'][key] || key;
+        }
+
+        function initApp() {
+            setLanguage(currentLang);
+            
+            // إغلاق قائمة اللغات عند النقر خارجها
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#btn-lang-toggle') && !e.target.closest('#lang-menu')) {
+                    document.getElementById('lang-menu').classList.add('hidden');
+                }
+            });
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            
+            document.documentElement.lang = lang.toLowerCase();
+            document.documentElement.dir = t.dir;
+            document.body.className = `antialiased min-h-screen ${t.font}`;
+            
+            document.getElementById('current-lang-text').innerText = lang;
+            
+            // تحديث النصوص
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.innerHTML = t[key];
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (t[key]) el.placeholder = t[key];
+            });
+
+            // إغلاق القائمة بعد الاختيار
+            document.getElementById('lang-menu').classList.add('hidden');
+
+            // إعادة رسم المكونات الديناميكية وتحديث الأيقونات
+            renderAuthStatus();
+            renderCategoryFilters();
+            renderDestinations();
+            renderInsuranceSection();
+            renderSignDictionary();
+            
+            if(deafMode) renderHorusChat();
+            
+            lucide.createIcons();
+            
+            if(blindMode) speakText(t.avatarBlindMsg);
+        }
+
+        function toggleLangMenu(event) {
+            event.stopPropagation();
+            document.getElementById('lang-menu').classList.toggle('hidden');
+        }
+
+        function toggleDeafMode() {
+            deafMode = !deafMode;
+            blindMode = false;
+            updateAccessibilityUI();
+            if(deafMode && horusHistory.length === 0) {
+                horusHistory.push({ sender: 'horus', text: getT('avatarDeafMsg'), sign: '🦅👋' });
+                renderHorusChat();
+            }
+        }
+
+        function toggleBlindMode() {
+            blindMode = !blindMode;
+            deafMode = false;
+            updateAccessibilityUI();
+            if(blindMode) speakText(getT('avatarBlindMsg'));
+            else window.speechSynthesis.cancel();
+        }
+
+        function updateAccessibilityUI() {
+            const deafWidget = document.getElementById('horus-widget');
+            const blindWidget = document.getElementById('blind-widget');
+            const deafBtn = document.getElementById('btn-deaf-mode');
+            const blindBtn = document.getElementById('btn-blind-mode');
+
+            deafWidget.classList.toggle('hidden', !deafMode);
+            deafWidget.classList.toggle('flex', deafMode);
+            deafBtn.className = deafMode ? 'p-2.5 rounded-xl transition-all border-2 cursor-pointer bg-amber-400 text-blue-950 border-white shadow-lg' : 'p-2.5 rounded-xl transition-all border-2 cursor-pointer bg-[#152e6f] text-[#D4AF37] border-transparent hover:border-amber-400';
+
+            blindWidget.classList.toggle('hidden', !blindMode);
+            blindBtn.className = blindMode ? 'p-2.5 rounded-xl transition-all border-2 cursor-pointer bg-red-600 text-white border-white animate-pulse shadow-lg' : 'p-2.5 rounded-xl transition-all border-2 cursor-pointer bg-[#152e6f] text-[#D4AF37] border-transparent hover:border-amber-400';
+            
+            lucide.createIcons();
+        }
+
+        // --- 4. النوافذ المنبثقة (Modals) ونظام التسجيل ---
+
+        function triggerAction(type, content = '', title = '') {
+            const modal = document.getElementById('main-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const modalHeader = document.getElementById('modal-header');
+
+            modal.classList.remove('hidden');
+            modalTitle.innerText = title || (type === 'login' ? getT('typeLogin') : '');
+
+            if (type === 'success') {
+                modalHeader.className = 'p-4 bg-emerald-600 text-white flex justify-between items-center';
+            } else {
+                modalHeader.className = 'p-4 bg-[#1E3A8A] text-white flex justify-between items-center';
+            }
+
+            if (type === 'login') {
+                modalBody.innerHTML = `
+                    <form id="vetting-form" onsubmit="handleSecurityVetting(event)" class="space-y-4">
+                        <p class="text-xs text-slate-500 font-semibold flex items-center gap-1">
+                            <i data-lucide="refresh-cw" class="w-4 h-4 animate-spin text-[#D4AF37]"></i> ${getT('securityCheck')}
+                        </p>
+                        <div>
+                            <label class="block text-xs font-bold text-[#1E3A8A] mb-1">${getT('regFullNameLabel')}</label>
+                            <input type="text" id="reg-name" placeholder="${getT('regFullNamePlace')}" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-[#D4AF37] focus:ring-0 text-sm outline-none" required>
+                            <p id="err-name" class="text-red-500 text-xs font-bold mt-1 hidden">${getT('validationErrorName')}</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-[#1E3A8A] mb-1">${getT('passportLabel')}</label>
+                            <input type="text" id="reg-passport" placeholder="${getT('passportPlace')}" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-[#D4AF37] focus:ring-0 text-sm outline-none" required minlength="6">
+                            <p id="err-passport" class="text-red-500 text-xs font-bold mt-1 hidden">${getT('validationErrorPassport')}</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-[#1E3A8A] mb-1">${getT('nationalityLabel')}</label>
+                            <input type="text" id="reg-nationality" placeholder="${getT('nationalityPlace')}" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-[#D4AF37] focus:ring-0 text-sm outline-none" required>
+                            <p id="err-nationality" class="text-red-500 text-xs font-bold mt-1 hidden">${getT('validationErrorNationality')}</p>
+                        </div>
+                        <button type="submit" id="btn-submit-vet" class="w-full bg-[#1E3A8A] hover:bg-blue-900 text-white font-bold py-3.5 rounded-xl transition-all mt-4 flex justify-center items-center gap-2 cursor-pointer shadow-lg">
+                            <span>${getT('submitVetting')}</span> <i data-lucide="check-circle" class="w-5 h-5"></i>
+                        </button>
+                    </form>
+                `;
+            } else {
+                modalBody.innerHTML = `<p class="text-gray-800 font-medium leading-relaxed text-sm">${content}</p>`;
+            }
+            
+            lucide.createIcons();
+            if(blindMode) speakText(`${title}. ${content}`);
+        }
+
+        function closeModal() {
+            document.getElementById('main-modal').classList.add('hidden');
+        }
+
+        function handleSecurityVetting(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('reg-name').value;
+            const passport = document.getElementById('reg-passport').value;
+            const nationality = document.getElementById('reg-nationality').value;
+            
+            if (name.trim().split(' ').length < 2) { document.getElementById('err-name').classList.remove('hidden'); return; }
+            if (passport.length < 6) { document.getElementById('err-passport').classList.remove('hidden'); return; }
+
+            const btn = document.getElementById('btn-submit-vet');
+            btn.innerHTML = `<i data-lucide="refresh-cw" class="w-5 h-5 animate-spin"></i>`;
+            lucide.createIcons();
+            btn.disabled = true;
+
+            setTimeout(() => {
+                kpAuth = { isApproved: true, name, passport, nationality };
+                localStorage.setItem('kp_is_approved', 'true');
+                localStorage.setItem('kp_tourist_name', name);
+                localStorage.setItem('kp_passport_id', passport);
+                localStorage.setItem('kp_nationality', nationality);
+                
+                closeModal();
+                renderAuthStatus();
+                renderInsuranceSection();
+                
+                const confetti = document.getElementById('confetti-overlay');
+                document.getElementById('confetti-title').innerText = getT('successMsg').split('!')[0] + '!';
+                document.getElementById('confetti-msg').innerText = currentLang === 'AR' ? `تم تفعيل وثيقة التأمين لـ: ${name}` : `Insurance active for: ${name}`;
+                confetti.classList.remove('hidden');
+                
+                setTimeout(() => confetti.classList.add('hidden'), 5000);
+            }, 2000);
+        }
+
+        function renderAuthStatus() {
+            const container = document.getElementById('auth-status-container');
+            if (kpAuth.isApproved) {
+                container.innerHTML = `<div class="bg-emerald-600 text-white px-3 py-2 rounded-xl font-bold flex items-center gap-1.5 text-xs shadow-inner animate-pulse"><i data-lucide="check-circle" class="w-4 h-4"></i> <span class="hidden md:inline">APPROVED</span></div>`;
+            } else {
+                container.innerHTML = `<button onclick="triggerAction('login')" class="bg-gradient-to-r from-[#D4AF37] to-amber-500 text-[#1E3A8A] px-4 py-2.5 rounded-xl font-black text-xs flex items-center gap-1.5 hover:scale-105 active:scale-95 transition shadow-md whitespace-nowrap cursor-pointer animate-bounce"><i data-lucide="user" class="w-4 h-4"></i> <span>${getT('login')}</span></button>`;
+            }
+            lucide.createIcons();
+        }
+
+        function handleResetApp() {
+            localStorage.clear();
+            kpAuth = { isApproved: false, name: '', passport: '', nationality: '' };
+            renderAuthStatus();
+            renderInsuranceSection();
+        }
+
+        // --- 5. المنشآت والبحث ---
+
+        function renderCategoryFilters() {
+            const container = document.getElementById('category-filters');
+            const categories = [
+                { id: 'all', label: getT('allCategories') },
+                { id: 'health', label: getT('healthCategory') },
+                { id: 'hotel', label: getT('hotelCategory') },
+                { id: 'food', label: getT('foodCategory') },
+                { id: 'culture', label: getT('cultureCategory') }
+            ];
+            
+            container.innerHTML = categories.map(cat => `
+                <button onclick="setCategory('${cat.id}')" class="px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer border ${activeCategory === cat.id ? 'bg-[#1E3A8A] text-white border-transparent' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100'}">
+                    ${cat.label}
+                </button>
+            `).join('');
+        }
+
+        function setCategory(catId) {
+            activeCategory = catId;
+            renderCategoryFilters();
+            renderDestinations();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('main-search-input').value.toLowerCase();
+            renderDestinations();
+        }
+
+        function renderDestinations() {
+            let filtered = destinations;
+            if (activeCategory !== 'all') {
+                filtered = filtered.filter(item => item.category === activeCategory);
+            }
+            if (searchQuery.trim() !== '') {
+                filtered = filtered.filter(item => {
+                    const nameAr = item.name.AR.toLowerCase();
+                    const nameEn = item.name.EN.toLowerCase();
+                    return nameAr.includes(searchQuery) || nameEn.includes(searchQuery);
+                });
+            }
+
+            document.getElementById('listings-count').innerText = filtered.length;
+            const grid = document.getElementById('listings-grid');
+            const noRes = document.getElementById('no-results');
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noRes.classList.remove('hidden');
+            } else {
+                noRes.classList.add('hidden');
+                grid.innerHTML = filtered.map(item => {
+                    const name = item.name[currentLang] || item.name['EN'];
+                    const type = item.type[currentLang] || item.type['EN'];
+                    const details = item.details[currentLang] || item.details['EN'];
+                    
+                    let badges = '';
+                    if (item.gahar) badges += `<span class="bg-emerald-600 text-white font-bold text-[9px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md"><i data-lucide="heart-pulse" class="w-3 h-3"></i> GAHAR</span>`;
+                    if (item.foodSafety) badges += `<span class="bg-amber-500 text-blue-950 font-bold text-[9px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md"><i data-lucide="utensils" class="w-3 h-3"></i> NFSA</span>`;
+                    if (!item.gahar && !item.foodSafety) badges += `<span class="bg-[#1E3A8A] text-[#D4AF37] font-bold text-[9px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md"><i data-lucide="award" class="w-3 h-3"></i> Tazkarti</span>`;
+
+                    return `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="${item.img}" alt="${name}" class="w-full h-full object-cover" loading="lazy" />
+                                <div class="absolute top-3 right-3 flex flex-col gap-1.5">${badges}</div>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-base text-gray-900 leading-tight">${name}</h4>
+                                    <div class="flex items-center gap-1 text-amber-500 bg-amber-50 px-2 py-0.5 rounded">
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i> <span class="text-[11px] font-bold">${item.rating}</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500 font-medium mb-3 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> ${type}</p>
+                                <p class="text-xs text-gray-600 leading-relaxed font-medium">${details}</p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <button onclick="handlePaymentClick('${name.replace(/'/g, "\\'")}')" class="w-full bg-slate-100 hover:bg-[#1E3A8A] hover:text-white text-[#1E3A8A] font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer text-xs">
+                                ${getT('bookBtn')} <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>`;
+                }).join('');
+            }
+            lucide.createIcons();
+        }
+
+        function handlePaymentClick(providerName) {
+            if (!kpAuth.isApproved) {
+                triggerAction('info', getT('securityReq'), getT('login'));
+            } else {
+                triggerAction('success', `${getT('paymentRedirect')} ${providerName}`, getT('paymentTitle'));
+            }
+        }
+
+        // --- 6. البطاقة التأمينية الموحدة والطباعة ---
+
+        function renderInsuranceSection() {
+            const container = document.getElementById('insurance-content');
+            if (!kpAuth.isApproved) {
+                container.innerHTML = `
+                    <div class="text-center no-print">
+                        <div class="flex justify-center mb-4"><i data-lucide="shield-alert" class="text-[#D4AF37] w-12 h-12"></i></div>
+                        <h3 class="text-2xl font-black text-white mb-2">${getT('insuranceTitle')}</h3>
+                        <p class="text-slate-400 mb-6 font-medium text-sm">${getT('securityReq')}</p>
+                        <button onclick="triggerAction('login')" class="bg-gradient-to-r from-[#D4AF37] to-amber-500 text-[#1E3A8A] px-8 py-3.5 rounded-xl font-black hover:shadow-lg transition cursor-pointer text-sm animate-pulse">${getT('login')}</button>
+                    </div>`;
+            } else {
+                const qrData = JSON.stringify({ portal: "Kemet Pass", holder: kpAuth.name, passport: kpAuth.passport, status: "ACTIVE_VERIFIED" });
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}&color=1e3a8a`;
+
+                container.innerHTML = `
+                    <div class="text-center mb-8 no-print">
+                        <h3 class="text-3xl font-black text-[#D4AF37] mb-2">${getT('insuranceTitle')}</h3>
+                        <p class="text-gray-300 max-w-xl mx-auto text-xs">${getT('successMsg')}</p>
+                    </div>
+                    <div id="print-area" class="w-full bg-white text-gray-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-[#D4AF37] relative">
+                        <div class="bg-[#1E3A8A] text-white p-6 flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <span class="text-4xl text-[#D4AF37]">𓋹</span>
+                                <div>
+                                    <h4 class="font-black text-xl tracking-wider leading-none">${getT('cardTitle')}</h4>
+                                    <p class="text-amber-200 text-[10px] font-bold mt-1 tracking-widest uppercase">${getT('cardSubtitle')}</p>
+                                </div>
+                            </div>
+                            <div class="text-right rtl:text-left">
+                                <p class="text-xs text-blue-200 font-mono" dir="ltr">KP-2026-EG</p>
+                                <p class="text-[10px] text-emerald-400 font-bold uppercase flex items-center gap-1 mt-0.5 justify-end rtl:justify-start" dir="ltr">
+                                    <i data-lucide="check-circle" class="w-3 h-3"></i> AMAN APPROVED
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="md:col-span-2 space-y-4">
+                                <div><p class="text-[10px] text-gray-400 font-bold uppercase">${getT('insuranceHolder')}</p><p class="text-lg font-black text-[#1E3A8A]">${kpAuth.name}</p></div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div><p class="text-[10px] text-gray-400 font-bold uppercase">${getT('passportLabel')}</p><p class="text-sm font-bold text-gray-800 font-mono">${kpAuth.passport}</p></div>
+                                    <div><p class="text-[10px] text-gray-400 font-bold uppercase">${getT('nationalityLabel')}</p><p class="text-sm font-bold text-gray-800">${kpAuth.nationality}</p></div>
+                                </div>
+                                <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-xl">
+                                    <p class="text-[10px] text-emerald-600 font-bold uppercase">${getT('insuranceStatus')}</p>
+                                    <p class="text-xs font-black text-emerald-800 flex items-center gap-1.5 mt-0.5"><i data-lucide="shield-check" class="w-4 h-4"></i> ${getT('insuranceActive')}</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center justify-center border-t md:border-t-0 md:border-s-2 border-dashed border-gray-200 pt-4 md:pt-0 md:ps-6 text-center">
+                                <div class="w-32 h-32 bg-gray-50 rounded-xl border-4 border-[#1E3A8A] p-2 flex items-center justify-center shadow-inner">
+                                    <img src="${qrUrl}" alt="QR" class="w-full h-full object-contain" />
+                                </div>
+                                <p class="text-[8px] text-gray-400 font-bold uppercase mt-2">${getT('qrSubtitle')}</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 p-4 border-t flex flex-col sm:flex-row justify-between items-center text-[10px] font-bold text-gray-500 gap-2">
+                            <p>${getT('printSecurityToken')} <span class="text-gray-800 font-mono" dir="ltr">KP-2026-SECURE</span></p>
+                            <p class="text-center">${getT('printStamp')}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-3 mt-6 no-print">
+                        <button onclick="handlePrintBooking()" class="bg-[#D4AF37] hover:bg-amber-500 text-[#1E3A8A] px-6 py-2.5 rounded-xl font-black hover:shadow-lg transition flex items-center gap-2 cursor-pointer text-xs"><i data-lucide="printer" class="w-4 h-4"></i> ${getT('printBtn')}</button>
+                        <button onclick="handleResetApp()" class="bg-red-800 hover:bg-red-950 text-white px-4 py-2.5 rounded-xl font-bold text-xs cursor-pointer"><i data-lucide="power" class="w-4 h-4 inline"></i></button>
+                    </div>`;
+            }
+            lucide.createIcons();
+        }
+
+        function handlePrintBooking() {
+            const printContent = document.getElementById("print-area").innerHTML;
+            const printWindow = window.open('', '_blank', 'width=900,height=800');
+            printWindow.document.write(`
+              <html lang="${currentLang.toLowerCase()}" dir="${translations[currentLang].dir}">
+                <head>
+                  <title>${getT('printTitle')}</title>
+                  <script src="https://cdn.tailwindcss.com"><\/script>
+                  <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+                    body { font-family: ${currentLang==='AR' ? "'Cairo'" : "'Plus Jakarta Sans'"}, sans-serif; padding: 40px; }
+                    .print-container { max-width: 800px; margin: 0 auto; border: 4px double #d4af37; border-radius: 1.5rem; overflow: hidden; }
+                  </style>
+                </head>
+                <body>
+                  <div class="print-container">${printContent}</div>
+                  <script>window.onload = function() { window.print(); setTimeout(function(){window.close();}, 500); };<\/script>
+                </body>
+              </html>
+            `);
+            printWindow.document.close();
+        }
+
+        // --- 7. قاموس لغة الإشارة والشات ---
+        
+        function handleDictSearch() {
+            renderSignDictionary();
+        }
+
+        function renderSignDictionary() {
+            const query = document.getElementById('dict-search-input')?.value.toLowerCase() || '';
+            const grid = document.getElementById('sign-dict-grid');
+            
+            const filtered = signDictionary.filter(item => {
+                return item.word.AR.toLowerCase().includes(query) || item.word.EN.toLowerCase().includes(query);
+            });
+
+            grid.innerHTML = filtered.map(item => `
+                <div class="border-2 border-slate-100 hover:border-[#D4AF37] bg-slate-50 hover:bg-amber-50/50 rounded-2xl p-6 transition-all">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-lg text-slate-900">${item.word[currentLang] || item.word['EN']}</h4>
+                        <span class="text-3xl animate-pulse">${item.sign}</span>
+                    </div>
+                    <p class="text-xs text-[#1E3A8A] font-bold mb-2">${getT('dictDesc')}</p>
+                    <p class="text-sm text-slate-600 leading-relaxed font-medium">${item.desc[currentLang] || item.desc['EN']}</p>
+                </div>
+            `).join('');
+        }
+
+        function handleHorusSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('horus-input');
+            const q = input.value.trim();
+            if (!q) return;
+
+            horusHistory.push({ sender: 'user', text: q });
+            input.value = '';
+            renderHorusChat();
+
+            setTimeout(() => {
+                const matchedQA = horusQAData.find(qa => qa.question.AR.includes(q) || qa.question.EN.toLowerCase().includes(q.toLowerCase()));
+                if (matchedQA) {
+                    horusHistory.push({ sender: 'horus', text: matchedQA.answer[currentLang] || matchedQA.answer['EN'], sign: matchedQA.signEmoji, signDesc: matchedQA.signDesc[currentLang] || matchedQA.signDesc['EN'] });
+                    speakText(matchedQA.answer[currentLang] || matchedQA.answer['EN']);
+                } else {
+                    const fallback = currentLang === 'AR' ? "عذراً، لم أفهم بدقة. جرب كلمة مثل: مستشفى، فندق." : "Sorry, I could not parse this keyword.";
+                    horusHistory.push({ sender: 'horus', text: fallback, sign: "🤷‍♂️❓" });
+                    speakText(fallback);
+                }
+                renderHorusChat();
+            }, 800);
+        }
+
+        function renderHorusChat() {
+            const historyContainer = document.getElementById('horus-chat-history');
+            const suggContainer = document.getElementById('horus-suggestions');
+
+            historyContainer.innerHTML = horusHistory.map(msg => `
+                <div class="flex flex-col ${msg.sender === 'user' ? 'items-end rtl:items-start ltr:items-end' : 'items-start rtl:items-end ltr:items-start'}">
+                    <div class="p-3 rounded-2xl max-w-[85%] text-xs font-semibold ${msg.sender === 'user' ? 'bg-[#1E3A8A] text-white' : 'bg-white text-slate-800 border border-slate-200'}">
+                        <p class="leading-relaxed">${msg.text}</p>
+                        ${msg.sign ? `
+                        <div class="mt-2 bg-amber-50 border border-amber-200 p-2 rounded-xl text-[#1E3A8A] text-center" dir="ltr">
+                            <p class="text-xl font-bold mb-1">${msg.sign}</p>
+                            ${msg.signDesc ? `<p class="text-[10px] leading-relaxed font-medium" dir="${translations[currentLang].dir}">${msg.signDesc}</p>` : ''}
+                        </div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            historyContainer.scrollTop = historyContainer.scrollHeight;
+
+            suggContainer.innerHTML = horusQAData.map(qa => `
+                <button type="button" onclick="document.getElementById('horus-input').value='${qa.question[currentLang] || qa.question['EN']}'; handleHorusSubmit(new Event('submit'))" class="whitespace-nowrap bg-slate-100 hover:bg-amber-100 text-[10px] text-slate-700 font-bold px-3 py-1.5 rounded-full cursor-pointer transition border border-slate-200">
+                    ${qa.question[currentLang] || qa.question['EN']}
+                </button>
+            `).join('');
+        }
+
+        // --- 8. إمكانيات الوصول (Speech & SOS) ---
+        
+        function triggerSOS() {
+            const btn = document.getElementById('btn-sos');
+            const status = document.getElementById('sos-status');
+            btn.disabled = true;
+            status.innerText = getT('sosSending');
+            status.classList.remove('hidden');
+            if(blindMode) speakText(getT('sosSending'));
+            
+            setTimeout(() => {
+                btn.disabled = false;
+                status.classList.add('hidden');
+                triggerAction('success', getT('sosSuccess'), getT('sosTitle'));
+            }, 3500);
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // توافقية اللغات لمحرك الصوت
+                if (currentLang === 'AR') utterance.lang = 'ar-EG';
+                else if (currentLang === 'EN') utterance.lang = 'en-US';
+                else utterance.lang = currentLang.toLowerCase() + '-' + currentLang; 
+
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function handleVoiceListening() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                triggerAction('info', getT('speechSupportError'), 'Error');
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            if (currentLang === 'AR') recognition.lang = 'ar-EG';
+            else if (currentLang === 'EN') recognition.lang = 'en-US';
+            else recognition.lang = currentLang.toLowerCase() + '-' + currentLang;
+
+            const btn = document.getElementById('btn-voice-listen');
+            const res = document.getElementById('voice-text-result');
+            const content = document.getElementById('voice-text-content');
+            const anim = document.getElementById('mic-animation-container');
+
+            recognition.onstart = () => {
+                btn.innerText = getT('listening');
+                btn.className = "w-full py-3 rounded-xl font-black text-xs transition bg-white text-red-600 animate-pulse shadow-md";
+                anim.innerHTML += '<span class="wave-ring -inset-2" id="wave-anim"></span>';
+                speakText(getT('listening'));
+            };
+
+            recognition.onerror = () => {
+                btn.innerText = "Error, try again";
+                document.getElementById('wave-anim')?.remove();
+                btn.className = "w-full py-3 rounded-xl font-black text-xs transition bg-red-900 text-white hover:bg-red-950";
+            };
+
+            recognition.onend = () => {
+                btn.innerText = getT('a11yBlind'); // زر التنشيط مرة أخرى
+                document.getElementById('wave-anim')?.remove();
+                btn.className = "w-full py-3 rounded-xl font-black text-xs transition bg-red-900 text-white hover:bg-red-950";
+            };
+
+            recognition.onresult = (event) => {
+                const text = event.results[0][0].transcript;
+                res.classList.remove('hidden');
+                content.innerText = text;
+                processVoiceCommand(text);
+            };
+
+            recognition.start();
+        }
+
+        function processVoiceCommand(command) {
+            const normalized = command.toLowerCase();
+            let responseSpeech = "";
+
+            // تغطية كافة الكلمات المفتاحية باللغات المختلفة (AR, EN, FR, DE, RU, IT, ES)
+            const hospitalKeys = ["مستشفى", "hospital", "hôpital", "krankenhaus", "больница", "ospedale", "hospital"];
+            const hotelKeys = ["فندق", "hotel", "hôtel", "отель", "hotel"];
+            const sosKeys = ["استغاثة", "sos", "urgence", "notfall", "emergenza", "emergencia"];
+
+            if (hospitalKeys.some(k => normalized.includes(k))) {
+                document.getElementById('main-search-input').value = currentLang === 'AR' ? "مستشفى" : "Hospital";
+                setCategory('health');
+                responseSpeech = getT('listingsTitle');
+            } else if (hotelKeys.some(k => normalized.includes(k))) {
+                document.getElementById('main-search-input').value = currentLang === 'AR' ? "فندق" : "Hotel";
+                setCategory('hotel');
+                responseSpeech = getT('listingsTitle');
+            } else if (sosKeys.some(k => normalized.includes(k))) {
+                triggerSOS();
+                responseSpeech = getT('sosSuccess');
+            } else {
+                responseSpeech = currentLang === 'AR' ? `سمعت: "${command}". جرب قول: مستشفى أو استغاثة.` : `Heard: "${command}". Try: hospital or SOS.`;
+            }
+
+            speakText(responseSpeech);
+            document.getElementById('voice-text-content').innerText = responseSpeech;
+            scrollToSection('listings');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- تهيئة التطبيق عند التحميل ---
+        window.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>
